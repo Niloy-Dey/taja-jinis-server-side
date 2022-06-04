@@ -1,13 +1,13 @@
-// const express = require('express')
+const express = require('express')
 const app = express();
 const cors = require('cors');
 const port = process.env.PORT || 5000;
 const path = require('path')
 require('dotenv').config();
 const { MongoClient, ServerApiVersion, OpjectId } = require('mongodb');
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
-const express = require('express')
-const path = require('path')
+
+// const express = require('express')
+
 require('dotenv').config();
 
 
@@ -22,6 +22,8 @@ app.use(express.json());
 
 
 
+
+
 const uri = "mongodb+srv://taja-jinis:sbtBpOt3yMnh7tZG@cluster0.kg32tqi.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
@@ -30,10 +32,10 @@ async function run() {
     try {
         await client.connect();
         // console.log('database connected');
-        const toolsCollection = client.db('manufacturing-website').collection('products');
-        const ordersCollection = client.db('manufacturing-website').collection('orderDetails');
-        const reviewCollection = client.db('manufacturing-website').collection('review');
-        const userCollection = client.db('manufacturing-website').collection('users');
+        const toolsCollection = client.db('taja-jinis').collection('products');
+        const ordersCollection = client.db('taja-jinis').collection('orderDetails');
+        const reviewCollection = client.db('taja-jinis').collection('review');
+        const userCollection = client.db('taja-jinis').collection('users');
 
 
 
