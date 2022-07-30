@@ -28,11 +28,12 @@ const uri = "mongodb+srv://taja-jinis:sbtBpOt3yMnh7tZG@cluster0.kg32tqi.mongodb.
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 
+
 async function run() {
     try {
         await client.connect();
         // console.log('database connected');
-        const toolsCollection = client.db('taja-jinis').collection('products');
+        const productCollection = client.db('taja-jinis').collection('products');
         const ordersCollection = client.db('taja-jinis').collection('orderDetails');
         const reviewCollection = client.db('taja-jinis').collection('review');
         const userCollection = client.db('taja-jinis').collection('users');
@@ -41,19 +42,26 @@ async function run() {
 
 
         /* get method for all tools data loading in UI  */
-        app.get('/tools', async (req, res) => {
+        app.get('/products', async (req, res) => {
             const query = {};
-            const cursor = toolsCollection.find(query)
+            const cursor = productCollection.find(query)
             const tools = await cursor.toArray();
             res.send(tools);
 
         })
 
+        /* post method for adding new product */
+        app.post('/products', async (req, res) => {
+            const newProduct = req.body;
+            const result = await productCollection.insertOne(newProduct);
+            res.send(result);
+        })
+
         //  single data finding for showing 
-        app.get('/tool/:id', async (req, res) => {
+        app.get('/product/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
-            const product = await toolsCollection.findOne(query);
+            const product = await productCollection.findOne(query);
             res.send(product);
         });
 
@@ -74,12 +82,7 @@ async function run() {
             res.send(allOrder);
         })
 
-        /* post method for adding new tool */
-        app.post('/tools', async (req, res) => {
-            const newTool = req.body;
-            const result = await toolsCollection.insertOne(newTool);
-            res.send(result);
-        })
+
 
 
         // deleting data for dashboard my orders page 
@@ -160,7 +163,7 @@ async function run() {
 
 
         // Deleting manage product  data 
-        app.delete('/tools/:id', async (req, res) => {
+        app.delete('/product/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const manageData = await toolsCollection.deleteOne(query);
