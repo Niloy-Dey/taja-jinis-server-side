@@ -39,9 +39,7 @@ async function run() {
         const userCollection = client.db('taja-jinis').collection('users');
 
 
-
-
-        /* get method for all tools data loading in UI  */
+        /* get method for all products data loading in UI  */
         app.get('/products', async (req, res) => {
             const query = {};
             const cursor = productCollection.find(query)
@@ -68,12 +66,20 @@ async function run() {
         /* post method for orders details */
         app.post('/orderDetails', async (req, res) => {
             const orders = req.body;
-            console.log(orders);
+            // console.log(orders);
             const newOrder = await ordersCollection.insertOne(orders);
             console.log(newOrder);
             res.send(newOrder);
         })
 
+
+
+
+
+
+
+
+/* ==================================================================================== */
         /* Get order details for dashboard  */
         app.get('/orderDetails', async (req, res) => {
             const query = {};
