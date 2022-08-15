@@ -72,6 +72,12 @@ async function run() {
             res.send(newOrder);
         })
 
+        app.get('/orderDetails', async (req, res) => {
+            const query = {};
+            const cursor = ordersCollection.find(query)
+            const allOrder = await cursor.toArray();
+            res.send(allOrder);
+        })
 
 
 
@@ -81,12 +87,7 @@ async function run() {
 
 /* ==================================================================================== */
         /* Get order details for dashboard  */
-        app.get('/orderDetails', async (req, res) => {
-            const query = {};
-            const cursor = ordersCollection.find(query)
-            const allOrder = await cursor.toArray();
-            res.send(allOrder);
-        })
+       
 
 
 
