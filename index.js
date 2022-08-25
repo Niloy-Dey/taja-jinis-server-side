@@ -90,35 +90,13 @@ async function run() {
         // Deleting  ordered product data from dashboard
         app.delete('/orderDetails/:id', async (req, res) => {
             const id = req.params.id;
-            console.log(id);
-            const query = {_id: ObjectId(id)};
-            console.log(query)
+            // console.log(id);
+            const query = { _id: ObjectId(id) };
+            // console.log(query)
             const deletedData = await ordersCollection.deleteOne(query);
-            console.log(deletedData);
+            // console.log(deletedData);
             res.send(deletedData);
         });
-
-
-
-
-
-        /* ==================================================================================== */
-        /* Get order details for dashboard  */
-
-
-
-
-
-        // deleting data for dashboard my orders page 
-        // app.delete('/orderDetails/:id', async (req, res) => {
-        //     const id = req.params.id;
-        //     // console.log(id);
-        //     const query = { _id: ObjectId(id) };
-        //     // console.log(query);
-        //     const deleteProduct = await ordersCollection.deleteOne(query);
-        //     // console.log(deleteProduct);
-        //     res.send(deleteProduct);
-        // })
 
 
         /* post method for add review in database */
@@ -136,6 +114,29 @@ async function run() {
             res.send(review);
 
         })
+
+        // delete review from admin dashboard
+        app.delete('/review/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const deletedData = await reviewCollection.deleteOne(query);
+            res.send(deletedData);
+        });
+
+
+
+
+
+        /* ==================================================================================== */
+        /* Get order details for dashboard  */
+
+
+
+
+
+
+
+
 
 
 
