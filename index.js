@@ -87,11 +87,14 @@ async function run() {
             res.send(deletedData);
         });
 
-        // Deleting  product  data from admin and farmer
+        // Deleting  ordered product data from dashboard
         app.delete('/orderDetails/:id', async (req, res) => {
             const id = req.params.id;
-            const query = { _id: ObjectId(id) };
+            console.log(id);
+            const query = {_id: ObjectId(id)};
+            console.log(query)
             const deletedData = await ordersCollection.deleteOne(query);
+            console.log(deletedData);
             res.send(deletedData);
         });
 
@@ -107,15 +110,15 @@ async function run() {
 
 
         // deleting data for dashboard my orders page 
-        app.delete('/orderDetails/:id', async (req, res) => {
-            const id = req.params.id;
-            // console.log(id);
-            const query = { _id: ObjectId(id) };
-            // console.log(query);
-            const deleteProduct = await ordersCollection.deleteOne(query);
-            // console.log(deleteProduct);
-            res.send(deleteProduct);
-        })
+        // app.delete('/orderDetails/:id', async (req, res) => {
+        //     const id = req.params.id;
+        //     // console.log(id);
+        //     const query = { _id: ObjectId(id) };
+        //     // console.log(query);
+        //     const deleteProduct = await ordersCollection.deleteOne(query);
+        //     // console.log(deleteProduct);
+        //     res.send(deleteProduct);
+        // })
 
 
         /* post method for add review in database */
