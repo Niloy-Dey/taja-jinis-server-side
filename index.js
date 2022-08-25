@@ -4,7 +4,7 @@ const cors = require('cors');
 const port = process.env.PORT || 5000;
 const path = require('path')
 require('dotenv').config();
-const { MongoClient, ServerApiVersion, OpjectId } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 // const express = require('express')
 
@@ -79,15 +79,29 @@ async function run() {
             res.send(allOrder);
         })
 
+        // Deleting  product  data from admin and farmer
+        app.delete('/products/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const deletedData = await productCollection.deleteOne(query);
+            res.send(deletedData);
+        });
+
+        // Deleting  product  data from admin and farmer
+        app.delete('/orderDetails/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const deletedData = await productCollection.deleteOne(query);
+            res.send(deletedData);
+        });
 
 
 
 
 
-
-/* ==================================================================================== */
+        /* ==================================================================================== */
         /* Get order details for dashboard  */
-       
+
 
 
 
@@ -169,13 +183,7 @@ async function run() {
 
 
 
-        // Deleting manage product  data 
-        app.delete('/product/:id', async (req, res) => {
-            const id = req.params.id;
-            const query = { _id: ObjectId(id) };
-            const manageData = await toolsCollection.deleteOne(query);
-            res.send(manageData);
-        });
+
 
 
     }
