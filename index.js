@@ -2,13 +2,15 @@ const express = require('express')
 const app = express();
 const cors = require('cors');
 const port = process.env.PORT || 5000;
-const path = require('path')
 require('dotenv').config();
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
-
-// const express = require('express')
-
 require('dotenv').config();
+
+
+// const http = require("http");
+// const { Socket } = require('socket.io');
+// const {Server} = http.createServer(app);
+
 
 
 
@@ -21,11 +23,22 @@ app.use(express.json());
 // sbtBpOt3yMnh7tZG
 
 
-
-
-
 const uri = "mongodb+srv://taja-jinis:sbtBpOt3yMnh7tZG@cluster0.kg32tqi.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+
+// server-side
+// const io = new Server(server, {
+//     cors: {
+//       origin: "http://localhost:3000",
+//       methods: ["GET", "POST"],
+//     }
+//   });
+  
+
+// io.on("connection", (socket) =>{
+//     console.log(socket.id);
+    
+// })
 
 
 
@@ -37,6 +50,17 @@ async function run() {
         const ordersCollection = client.db('taja-jinis').collection('orderDetails');
         const reviewCollection = client.db('taja-jinis').collection('review');
         const userCollection = client.db('taja-jinis').collection('users');
+
+      /* socket io coding   */
+      app.get('/', (req, res) => {
+        res.sendFile(__dirname + '/Chat.js');
+      });
+
+
+
+
+
+
 
 
         /* get method for all products data loading in UI  */
@@ -197,7 +221,6 @@ async function run() {
 
 }
 run().catch(console.dir)
-
 
 
 
