@@ -13,13 +13,16 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^16.0.1",
+    "dotenv": "^16.0.3",
     "eiows": "^4.1.2",
-    "express": "^4.18.1",
+    "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
-    "mongodb": "^4.6.0",
+    "mongodb": "^4.12.0",
     "node": "^17.7.2",
     "socket.io": "^4.5.2",
+    "sslcommerz": "^1.7.0",
+    "sslcommerz-lts": "^1.1.0",
+    "uuid": "^9.0.0",
     "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.4.0"
   },
   "optionalDependencies": {
