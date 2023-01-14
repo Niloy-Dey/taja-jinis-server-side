@@ -237,14 +237,14 @@ async function run() {
 ----------------------------------------------------------------- */
 
 //sslcommerz init
-app.post('/init', (req, res) => {
+app.post('/init', async(req, res) => {
   // console.log(req.body)
   const data = {
       total_amount: req.body.total_amount,
       currency: 'BDT',
       tran_id: 'REF123',
       success_url: 'http://localhost:5000/success',
-      fail_url: 'http://localhost:5000/fail',
+      fail_url: 'http://localhost:5000/failure',
       cancel_url: 'http://localhost:5000/cancel',
       ipn_url: 'http://localhost:5000/ipn',
       shipping_method: 'Courier',
@@ -285,8 +285,8 @@ app.post('/init', (req, res) => {
 
 
       // pop up node js  to frot-end  
-      if(data.GatewayPageURL){
-        res.json(data.GatewayPageURL);
+      if(data?.GatewayPageURL){
+        res.json(data?.GatewayPageURL);
       }
       else{
         return res.status(400).json({
@@ -400,3 +400,5 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`taja jinis website listening on port ${port}`);
 });
+
+module.exports = app;
